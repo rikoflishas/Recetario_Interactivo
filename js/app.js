@@ -1,16 +1,16 @@
-// object of new recipe
-// const newRecipe = {
-//     name: name, 
-//     ingredients: ingredients, 
-//     description: description, 
-//     category: category, 
-//     image:image
-// };
+//object of new recipe
+const newRecipe = {
+    name: name, 
+    ingredients: ingredients, 
+    description: description, 
+    category: category, 
+    image:image
+};
 
 //Arreglo para guardar nuevas recetas
 let recipes = [];
 
-//Funcion para añadir tarea
+//Funcion para añadir receta
 function addRecipe(title, description) {
     const recipe = {
         id: Date.now(), // Id unico para añadir la fecha de cada receta
@@ -35,6 +35,7 @@ function renderRecipe(){
             <div>
                 <h5>${recipe.title}</h5>
                 <p class="mb-1">${recipe.description}</p>
+                <p class="mb-1">${recipe.image}</p>
                 <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${recipe.id})">eliminar</button>
             </div>
         `;
@@ -48,12 +49,14 @@ function renderRecipe(){
 // manejar el formulario
 document.getElementById("recipeForm").addEventListener("submit", function (event) {
     event.preventDefault();
+
     const title = document.getElementById("recipeTitle").value;
     const description = document.getElementById("recipeDescription").value;
+    const image = document.getElementById('recipeImage').value;
 
-    addRecipe(title, description)
+    addRecipe(title, description,image);
 
-    event.target.reset()
+    event.target.reset();
 })
 
 
