@@ -10,52 +10,74 @@
 //Arreglo para guardar nuevas recetas
 let recipes = [];
 
-//Function to add new recipes
-function addRecipe (title, description){
+//Funcion para añadir tarea
+function addRecipe(title, description) {
     const recipe = {
-        id: Date.now(),//id para guardar la fecha 
+        id: Date.now(), // Id unico para añadir la fecha de cada receta
         title,
         description
     };
-    recipes.push(recipe);
+    recipes.push(recipe)
+
     renderRecipe();
 }
 
-function renderRecipe() {
-    const recipeList = document.getElementById("recipeList");
-    recipeList.innerHTML = "";//limpia la lista
+// Funcion que reenderiza las recetas (Dibuje las tareas en html)
+function renderRecipe(){
+    const recipeList = document.getElementById("recipeList")
+    recipeList.innerHTML = ""; //limpia la lista de receta
 
     recipes.forEach(recipe => {
-        const listItem = document.createElement('li');
+        const listItem = document.createElement('li')
         listItem.className = "list-group-item d-flex justify-content-between align-items-center";
 
-            listItem.innerHTML = `
+        listItem.innerHTML = `
             <div>
                 <h5>${recipe.title}</h5>
-                <p class = "mb-1">${recipe.description}</p>
-                <button class="btn btn-danger btn-sm" onclick = "deleteRecipe(${recipe.id})">Eliminar</button>
+                <p class="mb-1">${recipe.description}</p>
+                <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${recipe.id})">eliminar</button>
             </div>
-            `;
+        `;
 
-            recipeList.appendChild(listItem);
+        recipeList.appendChild(listItem);
     });
-    console.log(recipes);
+
+    console.log(recipes)
 }
 
-//Manejando el formulario
-document.getElementById("recipeForm").addEventListener("submit", function(event){
-    event.preventDefault();//cancela el evento
+// manejar el formulario
+document.getElementById("recipeForm").addEventListener("submit", function (event) {
+    event.preventDefault();
     const title = document.getElementById("recipeTitle").value;
     const description = document.getElementById("recipeDescription").value;
 
-    addRecipe(title, description);
+    addRecipe(title, description)
 
-    event.target.reset();
+    event.target.reset()
 })
 
-//Función que elimine una tarea
+
+// crear una funcion que elimine una tarea
 function deleteRecipe(id) {
-    recipes = recipes.filter(task => task.id);
-    console.log("Elimina la tarea con id: ", id);
+    recipes = recipes.filter(recipe => recipe.id !== id); // Filtra las tareas elimando la que coincida con el id de la tarea selecionada
+    console.log("elimine la tarea con id : ", id )
+    renderRecipe(); // Volver a renderizar/dibujar las tareas ya con el id eliminado
+}
+
+function deleteRecipe2(id) {
+    for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].id === id) {
+            recipes.splice(i, 1); // Elimina la tarea encontrada
+            break
+        }
+    }
     renderRecipe();
+}
+
+function deleteRecipe3(id) {
+    const indice = recipes.findIndex(recipe => recipe.id === id);
+    if (indice !== -1) {
+        recipes.splice(i, 1);
+        renderRecipe();
+    }
 }
