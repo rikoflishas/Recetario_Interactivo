@@ -1,19 +1,9 @@
-//object of new recipe
-const newRecipe = {
-    name: name, 
-    ingredients: ingredients, 
-    description: description, 
-    category: category, 
-    image:image
-};
-
-//Arreglo para guardar nuevas recetas
 let recipes = [];
 
-//Funcion para añadir receta
+//Funcion para añadir tarea
 function addRecipe(title, description) {
     const recipe = {
-        id: Date.now(), // Id unico para añadir la fecha de cada receta
+        id: Date.now(), // Id unico para cada tarea el cual obtiene la fecha exacgta y la utiliza como id
         title,
         description
     };
@@ -22,10 +12,10 @@ function addRecipe(title, description) {
     renderRecipe();
 }
 
-// Funcion que reenderiza las recetas (Dibuje las tareas en html)
+// Funcion que reenderiza las tareas (Dibuje las tareas en html)
 function renderRecipe(){
     const recipeList = document.getElementById("recipeList")
-    recipeList.innerHTML = ""; //limpia la lista de receta
+    recipeList.innerHTML = ""; //limpia la lista de tareas
 
     recipes.forEach(recipe => {
         const listItem = document.createElement('li')
@@ -35,7 +25,6 @@ function renderRecipe(){
             <div>
                 <h5>${recipe.title}</h5>
                 <p class="mb-1">${recipe.description}</p>
-                <p class="mb-1">${recipe.image}</p>
                 <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${recipe.id})">eliminar</button>
             </div>
         `;
@@ -49,14 +38,12 @@ function renderRecipe(){
 // manejar el formulario
 document.getElementById("recipeForm").addEventListener("submit", function (event) {
     event.preventDefault();
-
     const title = document.getElementById("recipeTitle").value;
     const description = document.getElementById("recipeDescription").value;
-    const image = document.getElementById('recipeImage').value;
 
-    addRecipe(title, description,image);
+    addRecipe(title, description)
 
-    event.target.reset();
+    event.target.reset()
 })
 
 
