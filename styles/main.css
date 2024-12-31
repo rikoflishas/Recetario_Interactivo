@@ -1,0 +1,11 @@
+body{
+    background-image: linear-gradient(black, white);
+    background-image: url(https://media.cnn.com/api/v1/images/stellar/prod/230320152734-02-mexican-foods-birria.jpg?c=original);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+h1{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
